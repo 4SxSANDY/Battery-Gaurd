@@ -1,0 +1,882 @@
+/* Base body styling with smooth transitions */
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: #f0f8ff;
+  color: #333;
+  margin: 0;
+  padding: 0;
+  transition: background-color 0.5s ease, color 0.5s ease;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Dark mode body styling */
+body.dark {
+  background-color: #121212;
+  color: #f5f5f5;
+}
+
+/* App wrapper */
+.app-wrapper {
+  width: 100%;
+  max-width: 500px;
+  margin: auto;
+  position: relative;
+}
+
+/* Main content container with glass effect */
+.container {
+  max-width: 600px;
+  margin: auto;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(10px);
+  padding: 2rem;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  transition: all 0.5s ease;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+/* Dark mode for container */
+body.dark .container {
+  background: rgba(30, 30, 30, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Container animation when charging */
+.container.charging {
+  animation: pulse 2s infinite alternate;
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  }
+  100% {
+    box-shadow: 0 8px 32px rgba(52, 152, 219, 0.3);
+  }
+}
+
+/* Header layout */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.toggle-group {
+  display: flex;
+  gap: 1rem;
+}
+
+/* App title styling */
+.app-title {
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin: 1rem 0 2rem;
+  text-align: center;
+  background: linear-gradient(135deg, #3498db, #2ecc71);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  position: relative;
+}
+
+body.dark .app-title {
+  background: linear-gradient(135deg, #3498db, #1abc9c);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+/* Common toggle switch wrapper */
+.theme-toggle {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 0;
+}
+
+/* Hide native checkbox */
+.toggle-input {
+  display: none;
+}
+
+/* Toggle switch base style */
+.toggle-label {
+  background-color: #ccc;
+  width: 60px;
+  height: 30px;
+  border-radius: 50px;
+  display: flex;
+  align-items: center;
+  position: relative;
+  cursor: pointer;
+  justify-content: space-between;
+  padding: 0 4px;
+  transition: background-color 0.3s ease;
+}
+
+/* Sun/Moon or Sound icons */
+.toggle-icon1, .toggle-icon2 {
+  font-size: 16px;
+  z-index: 2;
+  position: relative;
+}
+.toggle-icon1 {
+  left: 1px;
+}
+
+/* Toggle knob */
+.toggle-ball {
+  position: absolute;
+  top: 2px;
+  left: 3px;
+  width: 26px;
+  height: 26px;
+  background-color: #fff;
+  border-radius: 50%;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+  z-index: 1;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Toggle background and knob movement when checked */
+.toggle-input:checked + .toggle-label {
+  background-color: #4f4f4f;
+}
+.toggle-input:checked + .toggle-label .toggle-ball {
+  transform: translateX(35px);
+  background-color: #1e1e1e;
+}
+
+/* Notification bell button styling with pulse animation */
+.notify-btn {
+  background-color: #3498db;
+  color: white;
+  font-size: 1.2rem;
+  width: 40px;
+  height: 40px;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Hover effect for notify button */
+.notify-btn:hover {
+  background-color: #2980b9;
+  transform: scale(1.05);
+}
+
+.notify-btn:active {
+  transform: scale(0.95);
+}
+
+/* Pulse animation for the notify button */
+.notify-btn.pulse {
+  animation: notifyPulse 2s infinite;
+}
+
+@keyframes notifyPulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(52, 152, 219, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(52, 152, 219, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(52, 152, 219, 0);
+  }
+}
+
+/* Notify button dark mode support */
+body.dark .notify-btn {
+  background-color: #2980b9;
+}
+body.dark .notify-btn:hover {
+  background-color: #3498db;
+}
+
+/* Battery display section */
+.battery-display {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 2rem 0;
+  gap: 2rem;
+}
+
+/* Battery graphic styles */
+.battery-wrapper {
+  position: relative;
+  width: 100px;
+  height: 180px;
+}
+
+.battery-outline {
+  width: 80px;
+  height: 150px;
+  border: 3px solid #333;
+  border-radius: 10px;
+  position: relative;
+  overflow: hidden;
+}
+
+body.dark .battery-outline {
+  border-color: #ddd;
+}
+
+.battery-cap {
+  width: 30px;
+  height: 10px;
+  background-color: #333;
+  border-radius: 5px 5px 0 0;
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+body.dark .battery-cap {
+  background-color: #ddd;
+}
+
+.battery-level {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #4CAF50;
+  transition: height 1s ease-in-out, background-color 1s;
+}
+
+/* Battery charging animation */
+.battery-charging {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+  animation: chargingFlash 2s infinite;
+}
+
+@keyframes chargingFlash {
+  0%, 100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* Battery information display */
+.battery-info {
+  flex: 1;
+  text-align: left;
+}
+
+.battery-percentage {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin: 0 0 0.5rem;
+  color: #333;
+}
+
+body.dark .battery-percentage {
+  color: #f0f0f0;
+}
+
+.battery-status {
+  font-size: 1.1rem;
+  margin: 0.5rem 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.status-indicator {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: #e74c3c;
+}
+
+.status-indicator.charging {
+  background-color: #2ecc71;
+  animation: blink 1.5s infinite;
+}
+
+@keyframes blink {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+/* Temperature information */
+.temp-info {
+  margin: 0.5rem 0;
+  font-weight: 600;
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.temp-icon {
+  font-size: 1.2rem;
+}
+
+/* Button group layout */
+.button-group {
+  display: flex;
+  gap: 1rem;
+  margin-top: 2rem;
+  justify-content: center;
+}
+
+/* Action button styling */
+.action-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background-color: #f5f5f5;
+  color: #333;
+  border: none;
+  border-radius: 8px;
+  padding: 0.8rem 1.2rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  flex: 1;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.action-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.action-button:active {
+  transform: translateY(0);
+}
+
+body.dark .action-button {
+  background-color: #2a2a2a;
+  color: #f0f0f0;
+}
+
+.history-btn {
+  background-color: #3498db;
+  color: white;
+}
+
+.history-btn:hover {
+  background-color: #2980b9;
+}
+
+.chart-btn {
+  background-color: #2ecc71;
+  color: white;
+}
+
+.chart-btn:hover {
+  background-color: #27ae60;
+}
+
+.button-icon {
+  font-size: 1.2rem;
+}
+
+/* Charging indicator animation at the bottom */
+.charging-indicator {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 2rem;
+}
+
+.charging-dot {
+  width: 10px;
+  height: 10px;
+  background-color: #3498db;
+  border-radius: 50%;
+  animation: dotPulse 1.5s infinite ease-in-out;
+}
+
+.charging-dot:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.charging-dot:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes dotPulse {
+  0%, 100% {
+    transform: scale(0.7);
+    opacity: 0.5;
+  }
+  50% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Modal overlay styles */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+  backdrop-filter: blur(5px);
+  animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Modal content styling */
+.modal-content {
+  background: white;
+  padding: 2rem;
+  border-radius: 16px;
+  max-width: 90%;
+  max-height: 80%;
+  overflow-y: auto;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  animation: slideUp 0.4s ease-out;
+  width: 90%;
+  max-width: 600px;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+body.dark .modal-content {
+  background: #2a2a2a;
+  color: #f5f5f5;
+}
+
+/* Modal title */
+.modal-title {
+  margin-top: 0;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #eee;
+  font-size: 1.5rem;
+}
+
+body.dark .modal-title {
+  border-bottom-color: #444;
+}
+
+/* History list styling */
+/* History list styling */
+.history-list {
+  text-align: left;
+  list-style: none;
+  padding: 0;
+  margin: 1.5rem 0;
+}
+
+.history-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.8rem 1rem;
+  border-radius: 8px;
+  margin-bottom: 0.5rem;
+  background-color: #f5f5f5;
+  transition: all 0.3s ease;
+  border-left: 4px solid #ccc;
+}
+
+body.dark .history-item {
+  background-color: #333;
+  border-left-color: #555;
+}
+
+.history-item:hover {
+  transform: translateX(5px);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.history-item.charging-history {
+  border-left-color: #2ecc71;
+}
+
+.history-time {
+  font-size: 0.9rem;
+  color: #777;
+  flex: 2;
+}
+
+body.dark .history-time {
+  color: #bbb;
+}
+
+.history-level {
+  font-weight: 700;
+  font-size: 1.1rem;
+  flex: 1;
+  text-align: center;
+}
+
+.history-status {
+  flex: 1;
+  text-align: right;
+}
+
+.charging-badge, .discharging-badge {
+  padding: 0.3rem 0.6rem;
+  border-radius: 30px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  display: inline-block;
+}
+
+.charging-badge {
+  background-color: #2ecc71;
+  color: white;
+}
+
+.discharging-badge {
+  background-color: #95a5a6;
+  color: white;
+}
+
+/* No data message */
+.no-data {
+  text-align: center;
+  padding: 2rem;
+  color: #777;
+  font-style: italic;
+}
+
+body.dark .no-data {
+  color: #aaa;
+}
+
+/* Modal actions layout */
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 1.5rem;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+/* Download button */
+.download-btn {
+  background-color: #27ae60;
+  color: white;
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.download-btn:hover {
+  background-color: #219653;
+  transform: translateY(-2px);
+}
+
+.download-btn:active {
+  transform: translateY(0);
+}
+
+/* Close button */
+.close-btn {
+  background-color: #e0e0e0;
+  color: #333;
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 600;
+}
+
+.close-btn:hover {
+  background-color: #ccc;
+}
+
+body.dark .close-btn {
+  background-color: #444;
+  color: #f0f0f0;
+}
+
+body.dark .close-btn:hover {
+  background-color: #555;
+}
+
+/* Chart modal specific styles */
+.chart-modal {
+  width: 95%;
+  max-width: 800px;
+}
+
+.chart-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 1rem 0;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.filter-control {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.select-control {
+  padding: 0.5rem;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  background-color: white;
+  font-size: 0.9rem;
+  outline: none;
+  cursor: pointer;
+}
+
+body.dark .select-control {
+  background-color: #333;
+  border-color: #555;
+  color: #f0f0f0;
+}
+
+/* Filter options buttons */
+.filter-options {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.filter-options button {
+  background-color: #f0f0f0;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.filter-options button:hover {
+  background-color: #e0e0e0;
+}
+
+.filter-options button.active {
+  background-color: #3498db;
+  color: white;
+}
+
+body.dark .filter-options button {
+  background-color: #444;
+  color: #f0f0f0;
+}
+
+body.dark .filter-options button:hover {
+  background-color: #555;
+}
+
+body.dark .filter-options button.active {
+  background-color: #2980b9;
+}
+
+/* Chart container */
+.chart-container {
+  margin: 1.5rem 0;
+  background-color: rgba(255, 255, 255, 0.7);
+  border-radius: 8px;
+  padding: 1rem;
+  overflow: hidden;
+}
+
+body.dark .chart-container {
+  background-color: rgba(50, 50, 50, 0.7);
+}
+
+/* Toast notification */
+.toast {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%) translateY(100px);
+  background-color: rgba(40, 40, 40, 0.9);
+  color: white;
+  padding: 1rem 2rem;
+  border-radius: 30px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  z-index: 1000;
+  opacity: 0;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+}
+
+.toast.visible {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  .container {
+    padding: 1.5rem;
+    border-radius: 12px;
+  }
+  
+  .battery-display {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .battery-wrapper {
+    margin-bottom: 1rem;
+  }
+  
+  .battery-info {
+    text-align: center;
+  }
+  
+  .button-group {
+    flex-direction: column;
+  }
+  
+  .chart-controls {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .filter-control, .chart-type-control {
+    width: 100%;
+  }
+  
+  .battery-percentage {
+    font-size: 2rem;
+  }
+  
+  .app-title {
+    font-size: 1.8rem;
+  }
+}
+
+/* Animation for battery level changes */
+@keyframes levelChange {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Additional animations for UI elements */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Apply animations to elements */
+.app-title, .battery-display, .button-group {
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+
+.battery-display {
+  animation-delay: 0.2s;
+}
+
+.button-group {
+  animation-delay: 0.4s;
+}
+
+/* Progress bar animation for battery level visualization */
+@keyframes progressAnimation {
+  0% {
+    width: 0%;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+body.dark ::-webkit-scrollbar-track {
+  background: #333;
+}
+
+body.dark ::-webkit-scrollbar-thumb {
+  background: #666;
+}
+
+body.dark ::-webkit-scrollbar-thumb:hover {
+  background: #888;
+}
