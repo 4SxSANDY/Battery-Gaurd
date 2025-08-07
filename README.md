@@ -9,7 +9,7 @@ Laptops often overcharge or run critically low on battery without users realizin
 - 😓 Lack of timely alerts when battery needs attention
 - 🚫 No simple way to track battery performance over time
 
-**Battery Gourd** solves this by offering a lightweight, real-time battery monitoring web app with alert notifications, dark mode, sound toggles, and usage history – all in one responsive and installable PWA.
+**Battery Gourd** solves this by offering a lightweight, real-time battery monitoring web app with alert notifications, dark mode, sound toggles, and usage history – all in one responsive.
 
 ---
 
@@ -17,7 +17,8 @@ Laptops often overcharge or run critically low on battery without users realizin
 
 Battery Gourd is a modern web-based battery monitoring and reminder app built using React and TailwindCSS. It provides real-time insights about your laptop's battery status, alerts you when the battery is fully charged or low, and helps extend battery health. With sound notifications, dark mode, battery history, and optional desktop installation, it's your perfect power companion.
 
-![Battery Gourd Screenshot](https://thunderous-cassata-6f7547.netlify.app/preview.png)
+
+---
 
 ## 🚀 Features
 
@@ -27,10 +28,17 @@ Battery Gourd is a modern web-based battery monitoring and reminder app built us
 - 🔊 **Sound Alerts with Toggle Control**
 - 📈 **Battery History Tracking**
 - 🌡️ **Battery Temperature Display** (Windows only)
-- 💾 **PWA Support** – Install as a Desktop/Mobile App
 - 📊 **Usage Statistics and Charts**
 - 🔒 **Privacy Focused** – All data stored locally
 - 🌐 **Responsive UI** for all devices
+
+---
+
+## 📊 Privacy
+
+Battery Gourd does **not** collect or transmit any personal data. All battery statistics and history are stored locally in your browser.
+
+---
 
 ## 🛠️ Tech Stack
 
@@ -39,6 +47,30 @@ Battery Gourd is a modern web-based battery monitoring and reminder app built us
 - **State Management**: React Hooks & Context API
 - **Deployment**: Netlify
 
+---
+
+## 🔮 Future Implementation
+
+- **Browser Extension:**  
+  Plan to develop Battery Gourd as a browser extension for Chrome, Edge, and Firefox, allowing users to monitor and receive battery alerts directly from their browser toolbar.
+
+- **Cross-Platform Support:**  
+  Extend compatibility to more operating systems and devices, including tablets and smartphones.
+
+- **Cloud Sync (Optional):**  
+  Provide an opt-in feature to sync battery history and settings across devices using secure cloud storage.
+
+- **Customizable Alerts:**  
+  Allow users to set custom battery thresholds and notification preferences.
+
+- **Widget Support:**  
+  Add desktop and mobile widgets for quick battery status access.
+
+- **Localization:**  
+  Support multiple languages for a global user base.
+
+---
+
 ## 📦 Installation
 
 ```bash
@@ -46,3 +78,6 @@ git clone https://github.com/4SxSANDY/Battery-Gaurd.git
 cd Battery-Gaurd
 npm install
 npm start
+
+---
+
