@@ -74,6 +74,38 @@ body.dark .container {
   gap: 1rem;
 }
 
+.header-buttons {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+/* Info Button */
+.info-btn {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  color: white;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+}
+
+.info-btn:hover {
+  transform: translateY(-2px) scale(1.1);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+}
+
+.info-btn:active {
+  transform: translateY(0) scale(0.95);
+}
+
 /* App title styling */
 .app-title {
   font-size: 2.2rem;
@@ -340,6 +372,360 @@ body.dark .battery-percentage {
 
 .temp-icon {
   font-size: 1.2rem;
+}
+
+/* Floating Mode Toggle */
+.floating-mode-toggle {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+}
+
+.floating-toggle-btn {
+  background: linear-gradient(135deg, #74b9ff, #0984e3);
+  border: none;
+  border-radius: 25px;
+  padding: 0.8rem 1.5rem;
+  color: white;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  box-shadow: 0 4px 15px rgba(116, 185, 255, 0.3);
+}
+
+.floating-toggle-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(116, 185, 255, 0.4);
+}
+
+.floating-toggle-btn.active {
+  background: linear-gradient(135deg, #00b894, #00a085);
+  box-shadow: 0 4px 15px rgba(0, 184, 148, 0.3);
+}
+
+.floating-toggle-btn.active:hover {
+  box-shadow: 0 6px 20px rgba(0, 184, 148, 0.4);
+}
+
+.floating-icon {
+  font-size: 1.2rem;
+}
+
+/* Floating Liquid Effect */
+.floating-liquid {
+  position: relative;
+  overflow: hidden;
+  box-shadow: 
+    inset 0 0 10px rgba(255, 255, 255, 0.3),
+    0 0 15px rgba(255, 255, 255, 0.2);
+}
+
+.floating-liquid::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    45deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0.1) 50%,
+    transparent 70%
+  );
+  animation: liquidShine 3s ease-in-out infinite;
+}
+
+.floating-liquid::after {
+  content: '';
+  position: absolute;
+  top: 10%;
+  left: 20%;
+  width: 60%;
+  height: 20%;
+  background: radial-gradient(
+    ellipse,
+    rgba(255, 255, 255, 0.4) 0%,
+    transparent 70%
+  );
+  border-radius: 50%;
+  animation: liquidBubble 4s ease-in-out infinite;
+}
+
+@keyframes liquidShine {
+  0%, 100% {
+    opacity: 0.3;
+    transform: translateX(-100%);
+  }
+  50% {
+    opacity: 0.6;
+    transform: translateX(100%);
+  }
+}
+
+@keyframes liquidBubble {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+    opacity: 0.4;
+  }
+  50% {
+    transform: translateY(-10px) scale(1.1);
+    opacity: 0.7;
+  }
+}
+
+/* Water Mode Toggle */
+.water-mode-toggle {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+}
+
+.water-toggle-btn {
+  background: linear-gradient(135deg, #74b9ff, #0984e3);
+  border: none;
+  border-radius: 25px;
+  padding: 0.8rem 1.5rem;
+  color: white;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  box-shadow: 0 4px 15px rgba(116, 185, 255, 0.3);
+}
+
+.water-toggle-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(116, 185, 255, 0.4);
+}
+
+.water-toggle-btn.active {
+  background: linear-gradient(135deg, #00b894, #00a085);
+  box-shadow: 0 4px 15px rgba(0, 184, 148, 0.3);
+}
+
+.water-toggle-btn.active:hover {
+  box-shadow: 0 6px 20px rgba(0, 184, 148, 0.4);
+}
+
+.water-icon {
+  font-size: 1.2rem;
+}
+
+/* Floating Water Battery Styles */
+.water-battery-container {
+  position: relative;
+  width: 200px;
+  height: 300px;
+  margin: 0 auto;
+  perspective: 1000px;
+}
+
+.water-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(180deg, #e3f2fd 0%, #bbdefb 50%, #90caf9 100%);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 
+    inset 0 0 20px rgba(0, 0, 0, 0.1),
+    0 8px 32px rgba(0, 0, 0, 0.15);
+  border: 3px solid #64b5f6;
+}
+
+.water-level {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: linear-gradient(180deg, 
+    rgba(33, 150, 243, 0.8) 0%,
+    rgba(33, 150, 243, 0.9) 50%,
+    rgba(21, 101, 192, 0.95) 100%);
+  transition: height 0.5s ease-in-out;
+  border-radius: 0 0 17px 17px;
+}
+
+.water-surface {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.water-ripple {
+  position: absolute;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  animation: ripple 3s infinite;
+}
+
+.water-ripple:nth-child(1) {
+  width: 20px;
+  height: 20px;
+  top: 20%;
+  left: 30%;
+  animation-delay: 0s;
+}
+
+.water-ripple:nth-child(2) {
+  width: 15px;
+  height: 15px;
+  top: 60%;
+  right: 25%;
+  animation-delay: 1s;
+}
+
+.water-ripple:nth-child(3) {
+  width: 25px;
+  height: 25px;
+  bottom: 30%;
+  left: 20%;
+  animation-delay: 2s;
+}
+
+@keyframes ripple {
+  0% {
+    transform: scale(0);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(3);
+    opacity: 0;
+  }
+}
+
+.floating-battery {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+}
+
+.water-battery {
+  background: rgba(255, 255, 255, 0.9);
+  border: 2px solid #2196f3;
+  box-shadow: 0 4px 15px rgba(33, 150, 243, 0.3);
+}
+
+.water-battery-level {
+  background: linear-gradient(180deg, 
+    rgba(76, 175, 80, 0.9) 0%,
+    rgba(76, 175, 80, 0.8) 100%);
+  border-radius: 0 0 8px 8px;
+}
+
+.water-charging {
+  color: #2196f3;
+  text-shadow: 0 0 10px rgba(33, 150, 243, 0.5);
+}
+
+.water-cap {
+  background: linear-gradient(135deg, #2196f3, #1976d2);
+  border: 2px solid #1565c0;
+}
+
+.water-bubbles {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.bubble {
+  position: absolute;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0.3) 100%);
+  border-radius: 50%;
+  animation: bubbleFloat 4s infinite;
+}
+
+.bubble:nth-child(1) {
+  width: 8px;
+  height: 8px;
+  left: 20%;
+  animation-delay: 0s;
+}
+
+.bubble:nth-child(2) {
+  width: 12px;
+  height: 12px;
+  left: 60%;
+  animation-delay: 1s;
+}
+
+.bubble:nth-child(3) {
+  width: 6px;
+  height: 6px;
+  left: 80%;
+  animation-delay: 2s;
+}
+
+.bubble:nth-child(4) {
+  width: 10px;
+  height: 10px;
+  left: 40%;
+  animation-delay: 3s;
+}
+
+.bubble:nth-child(5) {
+  width: 7px;
+  height: 7px;
+  left: 70%;
+  animation-delay: 1.5s;
+}
+
+@keyframes bubbleFloat {
+  0% {
+    transform: translateY(100%) scale(0);
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-100px) scale(1);
+    opacity: 0;
+  }
+}
+
+/* Dark mode water styles */
+body.dark .water-container {
+  background: linear-gradient(180deg, #1a237e 0%, #283593 50%, #303f9f 100%);
+  border-color: #5c6bc0;
+}
+
+body.dark .water-level {
+  background: linear-gradient(180deg, 
+    rgba(63, 81, 181, 0.8) 0%,
+    rgba(63, 81, 181, 0.9) 50%,
+    rgba(48, 63, 159, 0.95) 100%);
+}
+
+body.dark .water-battery {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: #5c6bc0;
+}
+
+body.dark .water-cap {
+  background: linear-gradient(135deg, #5c6bc0, #3f51b5);
+  border-color: #3949ab;
 }
 
 /* Button group layout */
@@ -658,6 +1044,76 @@ body.dark .close-btn:hover {
   max-width: 800px;
 }
 
+/* Info modal specific styles */
+.info-modal {
+  max-width: 600px;
+  width: 90%;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.info-content {
+  margin: 1.5rem 0;
+}
+
+.info-section {
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  border-left: 4px solid #667eea;
+}
+
+.info-section h3 {
+  margin: 0 0 0.8rem 0;
+  color: #667eea;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.info-section ul {
+  margin: 0;
+  padding-left: 1.2rem;
+}
+
+.info-section li {
+  margin-bottom: 0.5rem;
+  line-height: 1.5;
+  color: #333;
+}
+
+.info-section strong {
+  color: #2c3e50;
+  font-weight: 600;
+}
+
+.info-section em {
+  color: #e74c3c;
+  font-style: italic;
+}
+
+/* Dark mode info styles */
+body.dark .info-section {
+  background: rgba(255, 255, 255, 0.05);
+  border-left-color: #8b9dc3;
+}
+
+body.dark .info-section h3 {
+  color: #8b9dc3;
+}
+
+body.dark .info-section li {
+  color: #f0f0f0;
+}
+
+body.dark .info-section strong {
+  color: #ecf0f1;
+}
+
+body.dark .info-section em {
+  color: #ff6b6b;
+}
+
 .chart-controls {
   display: flex;
   justify-content: space-between;
@@ -802,6 +1258,43 @@ body.dark .chart-container {
   
   .app-title {
     font-size: 1.8rem;
+  }
+
+  /* Mobile water battery styles */
+  .water-battery-container {
+    width: 150px;
+    height: 220px;
+  }
+
+  .water-toggle-btn {
+    padding: 0.6rem 1.2rem;
+    font-size: 0.9rem;
+  }
+
+  .water-icon {
+    font-size: 1rem;
+  }
+
+  /* Mobile floating mode styles */
+  .floating-toggle-btn {
+    padding: 0.6rem 1.2rem;
+    font-size: 0.9rem;
+  }
+
+  .floating-icon {
+    font-size: 1rem;
+  }
+
+  /* Mobile info button styles */
+  .info-btn {
+    width: 35px;
+    height: 35px;
+    font-size: 1rem;
+  }
+
+  .info-modal {
+    width: 95%;
+    max-height: 85vh;
   }
 }
 
