@@ -1,10 +1,10 @@
-import React, { useEffect, useState, useRef } from 'react'; // React core imports
-import BatteryDisplay from './components/BatteryDisplay'; // Custom component import
-import BatteryHistoryModal from './components/BatteryHistoryModal'; // Custom component import
-import BatteryChartModal from './components/BatteryChartModal'; // Custom component import
-import Toast from './components/Toast'; // Custom component import
+import React, { useEffect, useState, useRef } from 'react';
+import BatteryDisplay from './components/BatteryDisplay';
+import BatteryHistoryModal from './components/BatteryHistoryModal';
+import BatteryChartModal from './components/BatteryChartModal';
+import Toast from './components/Toast';
 
-import './index.css'; // Styles import
+import './index.css';
 import {
   LineChart,
   Line,
@@ -18,52 +18,40 @@ import {
   CartesianGrid,
   Area,
   AreaChart
-} from 'recharts'; // Chart library imports
+} from 'recharts';
 
 const App = () => {
-  // State initialization with localStorage
-  const [batteryLevel, setBatteryLevel] = useState(null); // Battery level state
-  const [isCharging, setIsCharging] = useState(null); // Charging status state
-  const [batteryTemp, setBatteryTemp] = useState('Loading...'); // Battery temperature state
-
-  // State initialization with localStorage for dark mode
+  const [batteryLevel, setBatteryLevel] = useState(null);
+  const [isCharging, setIsCharging] = useState(null);
+  const [batteryTemp, setBatteryTemp] = useState('Loading...');
   const [darkMode, setDarkMode] = useState(() => {
     const stored = localStorage.getItem('darkMode');
     return stored ? JSON.parse(stored) : false;
   });
-
-  // State initialization with localStorage for sound toggle
   const [soundOn, setSoundOn] = useState(() => {
     const stored = localStorage.getItem('soundOn');
     return stored ? JSON.parse(stored) : true;
   });
-
-  // State initialization with localStorage for battery history
   const [history, setHistory] = useState(() => {
     const stored = localStorage.getItem('batteryHistory');
     return stored ? JSON.parse(stored) : [];
   });
-
-  // UI state for modals and chart controls
   const [showHistory, setShowHistory] = useState(false);
   const [showChart, setShowChart] = useState(false);
   const [filterDays, setFilterDays] = useState(1);
   const [chartType, setChartType] = useState('area');
-  const batteryRef = useRef(null); // Ref for battery animation
-
-  // Filter battery history for chart
+  const batteryRef = useRef(null);
+  
   const filteredHistory = history.filter((entry) => {
     const entryDate = new Date(entry.time);
     const now = new Date();
     return now - entryDate <= filterDays * 24 * 60 * 60 * 1000;
   });
 
-  // Main effect: handles dark mode, battery info, localStorage, and notifications
   useEffect(() => {
     document.body.className = darkMode ? 'dark' : '';
-    localStorage.setItem('darkMode', JSON.stringify(darkMode)); // Save dark mode to localStorage
+    localStorage.setItem('darkMode', JSON.stringify(darkMode));
 
-    // Play alert sound if enabled
     const playAlert = () => {
       if (soundOn) {
         const audio = new Audio('/alert.mp3');
@@ -71,7 +59,6 @@ const App = () => {
       }
     };
 
-    // Notification API usage for battery alerts
     const notify = (msg) => {
       if (Notification.permission === 'granted') {
         new Notification('Battery Guard', { 
@@ -81,7 +68,6 @@ const App = () => {
       }
     };
 
-    // Battery info update and localStorage save
     const updateBatteryInfo = (battery) => {
       const level = Math.round(battery.level * 100);
       setBatteryLevel(level);
@@ -90,9 +76,7 @@ const App = () => {
       const newEntry = { time: timestamp, level, charging: battery.charging };
       const updatedHistory = [newEntry, ...history.slice(0, 49)];
       setHistory(updatedHistory);
-      localStorage.setItem('batteryHistory', JSON.stringify(updatedHistory)); // Save history to localStorage
-
-      // Battery alert logic
+      localStorage.setItem('batteryHistory', JSON.stringify(updatedHistory));
       if (battery.charging && level >= 95) {
         playAlert();
         notify('Battery is almost full! Unplug the charger.');
@@ -100,26 +84,23 @@ const App = () => {
         playAlert();
         notify('Battery is low! Please connect charger.');
       }
-      // Fake temperature for UI
       const fakeTemp = (30 + Math.random() * 15).toFixed(1);
       setBatteryTemp(`${fakeTemp} °C`);
     };
 
-    // Battery API event listeners
     navigator.getBattery().then((battery) => {
       updateBatteryInfo(battery);
       battery.addEventListener('levelchange', () => updateBatteryInfo(battery));
       battery.addEventListener('chargingchange', () => updateBatteryInfo(battery));
     });
     
-    // Animate battery level bar
+    // Animation for battery level
     if (batteryRef.current) {
       batteryRef.current.style.height = `${batteryLevel}%`;
     }
     
   }, [darkMode, soundOn, batteryLevel, history]);
 
-  // Notification permission handler
   const handleNotificationPermission = () => {
     Notification.requestPermission().then((perm) => {
       if (perm === 'granted') {
@@ -130,14 +111,13 @@ const App = () => {
     });
   };
   
-  // Toast notification state and function
   const [toast, setToast] = useState({ visible: false, message: '' });
+  
   const showToast = (message) => {
     setToast({ visible: true, message });
     setTimeout(() => setToast({ visible: false, message: '' }), 3000);
   };
 
-  // Export battery history as CSV
   const exportHistory = () => {
     const csv = [
       'Time,Battery Level,Charging Status',
@@ -157,7 +137,6 @@ const App = () => {
     showToast('History exported successfully!');
   };
   
-  // Helper: get battery color for UI
   const getBatteryColor = () => {
     if (batteryLevel === null) return '#ccc';
     if (batteryLevel <= 20) return '#ff5252';
@@ -165,7 +144,6 @@ const App = () => {
     return '#66bb6a';
   };
   
-  // Helper: get battery icon for UI
   const getBatteryIcon = () => {
     if (batteryLevel === null) return '🔋';
     if (isCharging) return '⚡';
@@ -174,12 +152,13 @@ const App = () => {
     return '🔋';
   };
   
-  // Chart rendering logic
   const renderChart = () => {
     if (filteredHistory.length === 0) {
       return <div className="no-data">No data available for selected time period</div>;
     }
+    
     const chartData = filteredHistory.slice().reverse();
+    
     switch (chartType) {
       case 'area':
         return (
@@ -254,7 +233,6 @@ const App = () => {
       <div className={`container ${isCharging ? 'charging' : ''}`}>
         <div className="header">
           <div className="toggle-group">
-            {/* Dark mode toggle with localStorage */}
             <div className="theme-toggle">
               <input
                 type="checkbox"
@@ -269,7 +247,6 @@ const App = () => {
                 <span className="toggle-ball"></span>
               </label>
             </div>
-            {/* Sound toggle with localStorage */}
             <div className="theme-toggle">
               <input
                 type="checkbox"
@@ -279,7 +256,7 @@ const App = () => {
                 onChange={() => {
                   const updated = !soundOn;
                   setSoundOn(updated);
-                  localStorage.setItem('soundOn', JSON.stringify(updated)); // Save sound toggle to localStorage
+                  localStorage.setItem('soundOn', JSON.stringify(updated));
                 }}
               />
               <label htmlFor="sound-toggle" className="toggle-label" aria-label="Toggle sound">
@@ -289,7 +266,6 @@ const App = () => {
               </label>
             </div>
           </div>
-          {/* Notification permission button */}
           <button className="notify-btn pulse" onClick={handleNotificationPermission} aria-label="Enable notifications">
             🔔
           </button>
@@ -297,7 +273,6 @@ const App = () => {
         
         <h1 className="app-title">Battery Guard</h1>
         
-        {/* Battery display and info */}
         <div className="battery-display">
           <div className="battery-wrapper">
             <div className="battery-outline">
@@ -331,7 +306,6 @@ const App = () => {
           </div>
         </div>
         
-        {/* History and chart buttons */}
         <div className="button-group">
           <button className="action-button history-btn" onClick={() => setShowHistory(true)}>
             <span className="button-icon">📜</span>
@@ -353,7 +327,6 @@ const App = () => {
         )}
       </div>
 
-      {/* History modal */}
       {showHistory && (
         <div className="modal-overlay" onClick={() => setShowHistory(false)}>
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
@@ -391,7 +364,6 @@ const App = () => {
         </div>
       )}
 
-      {/* Chart modal */}
       {showChart && (
         <div className="modal-overlay" onClick={() => setShowChart(false)}>
           <div className="modal-content chart-modal" onClick={(e) => e.stopPropagation()}>
@@ -458,3 +430,6 @@ const App = () => {
 };
 
 export default App;
+
+
+
